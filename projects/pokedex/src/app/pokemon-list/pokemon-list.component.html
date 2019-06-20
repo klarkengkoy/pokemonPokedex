@@ -1,0 +1,6 @@
+<h2>Pokémon MasterList</h2>
+<div [routerLink]="['/details', pokemon.name]" class=pokemonBox *ngFor="let pokemon of pokemons.results">
+  <img width=150 alt="pokemon thumbnail" [src]="getImg(pokemon.url)" onError="this.src='https://upload.wikimedia.org/wikipedia/commons/4/4c/Pokeball.png'">
+  <p><span class=pokemonid>#{{ getId(pokemon.url) | number: '3.0-0' }} </span><br><span
+      class="pokemonname">{{ pokemon.name | titlecase }}</span></p>
+</div>

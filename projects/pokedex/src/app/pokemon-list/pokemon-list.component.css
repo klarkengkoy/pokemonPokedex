@@ -1,0 +1,73 @@
+.pokemonBox{
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 10px;
+    background: #F2F2F2;
+    font-size: 15px;
+}
+
+p{
+    margin-top: 0px;
+}
+
+.pokemonBox{
+  background-color: #2098d1 !important;
+  cursor:pointer;
+  -webkit-transition: color 300ms;
+  transition: color 300ms;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+.pokemonBox:before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ecf0f1;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition: 300ms ease-out;
+    transition: 300ms ease-out;
+}
+.pokemonBox:hover:before{
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+}
+
+img{
+    margin: auto;
+    display: block;
+}
+
+.pokemonid {
+    font-family: "Flexo-Bold",arial,sans-serif;
+    color: #919191;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.pokemonname{
+    font-family: "Flexo-Demi",arial,sans-serif;
+    color: #313131;
+    font-weight: bold;
+}
+
+h2{
+    font-family: "Flexo-Medium",arial,sans-serif;
+}
