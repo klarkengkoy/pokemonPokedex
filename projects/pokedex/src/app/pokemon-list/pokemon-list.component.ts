@@ -11,7 +11,6 @@ export class PokemonListComponent implements OnInit {
 
   public pokemons = {};
   subs1: Subscription;
-  subs2: Subscription;
 
 
   constructor(private _pokemonService: PokemonService) { }
@@ -27,8 +26,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   getId(url: string) {
-    const id = url.split("/");
-    return id[6];
+    return url.split("/")[6];
   }
 
   getImg(url: string) {
