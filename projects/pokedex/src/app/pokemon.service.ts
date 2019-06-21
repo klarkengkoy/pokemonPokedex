@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { Pokemon, PokemonDetails } from './pokemon';
+import { Pokemon } from './pokemon';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -19,8 +19,7 @@ export class PokemonService {
     return this.http.get<Pokemon[]>(this._url);
   }
 
-
-  getPokemonDetails(name: string): Observable<PokemonDetails> {
+  getPokemonDetails(name: string): Observable<Pokemon> {
     return this.http.get<any>(`${this._url2}/${name}`);    
   }
 }

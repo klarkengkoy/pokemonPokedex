@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -9,14 +10,20 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonListComponent implements OnInit {
 
   public pokemons = {};
+  subs1: Subscription;
+  subs2: Subscription;
 
 
   constructor(private _pokemonService: PokemonService) { }
 
   ngOnInit() {
-    this._pokemonService.getPokemons().subscribe(data => {
+    this.subs1 = this._pokemonService.getPokemons().subscribe(data => {
       this.pokemons = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.subs1.unsubscribe();
   }
 
   getId(url: string) {
@@ -28,6 +35,10 @@ export class PokemonListComponent implements OnInit {
     const id = url.split("/");
     const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
     return imgUrl;
+  }
+
+  console(this) {
+    console.log(this);
   }
 
 }

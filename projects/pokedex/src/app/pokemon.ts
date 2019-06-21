@@ -1,9 +1,10 @@
-export interface Pokemon {
+export class Pokemon {
     id: number;
     name: string;
+    sprites: any;
 }
 
-export interface PokemonDetails {
+export class PokemonDetails {
     id: number;
     name: string;
     height: number;

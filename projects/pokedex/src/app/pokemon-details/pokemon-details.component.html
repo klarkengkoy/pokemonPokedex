@@ -1,8 +1,15 @@
-<button>Previous</button><button>Next Pokémon</button>
-<h1>{{ pokemonDetails.name | titlecase }}'s Details</h1>
+<button class="invisible" [ngSwitch]="pokemonDetails.id">
+<button *ngSwitchCase="10001" [routerLink]="['/details', 807 ]">Previous</button>
+<button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 1}" [routerLink]="['/details', pokemonDetails.id-1 ]">Previous</button>
+</button>
+<button button class="invisible" [ngSwitch]="pokemonDetails.id">
+<button *ngSwitchCase="807" [routerLink]="['/details', 10001 ]">Next Pokémon</button>
+<button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 10157}" [routerLink]="['/details', pokemonDetails.id+1 ]">Next Pokémon</button>
+</button>
+
 <div class="row">
   <div class="data column">
-    <h3>Data</h3>
+    <h3>{{ pokemonDetails.name | titlecase }}'s Data</h3>
     <table class="center">
       <tbody>
         <tr>
@@ -23,7 +30,7 @@
         </tr>
         <tr>
           <td class="label">Abilities</td>
-          <td class="details">
+          <td class="details" *ngIf="pokemonDetails.abilities">
             <p *ngFor="let abilities of pokemonDetails.abilities"> {{abilities.ability.name | titlecase }}
               <dd *ngIf="abilities.is_hidden"> => Hidden Ability </dd>
               <dd *ngIf="!abilities.is_hidden"> => Normal Ability </dd>
@@ -32,7 +39,7 @@
         </tr>
         <tr>
           <td class="label">Type/Types</td>
-          <td class="details">
+          <td class="details" *ngIf="pokemonDetails.types">
             <p *ngFor="let types of pokemonDetails.types" class="{{types.type.name}} typeIcon">
               {{ types.type.name | titlecase }}
             </p>
@@ -44,25 +51,25 @@
 
   <div class="column">
       <h2>{{ pokemonDetails.name | titlecase }}'s Sprites</h2>
-    <div class="sprites">
-      <img *ngIf="pokemonDetails.sprites.front_default" src="{{pokemonDetails.sprites.front_default}}">
-      <img *ngIf="pokemonDetails.sprites.back_default" src="{{pokemonDetails.sprites.back_default}}">
-      <img *ngIf="pokemonDetails.sprites.front_female" src="{{pokemonDetails.sprites.front_female}}">
-      <img *ngIf="pokemonDetails.sprites.back_female" src="{{pokemonDetails.sprites.back_female}}">
-      <img *ngIf="pokemonDetails.sprites.front_shiny" src="{{pokemonDetails.sprites.front_shiny}}">
-      <img *ngIf="pokemonDetails.sprites.back_shiny" src="{{pokemonDetails.sprites.back_shiny}}">
-      <img *ngIf="pokemonDetails.sprites.front_shiny_female" src="{{pokemonDetails.sprites.front_shiny_female}}">
-      <img *ngIf="pokemonDetails.sprites.back_shiny_female" src="{{pokemonDetails.sprites.back_shiny_female}}">
+    <div class="sprites" *ngIf="pokemonDetails.sprites">
+      <img *ngIf="pokemonDetails.sprites.front_default" src="{{pokemonDetails.sprites.front_default}}" (click)="previewImage(pokemonDetails.sprites.front_default)">
+      <img *ngIf="pokemonDetails.sprites.back_default" src="{{pokemonDetails.sprites.back_default}}" (click)="previewImage(pokemonDetails.sprites.back_default)">
+      <img *ngIf="pokemonDetails.sprites.front_female" src="{{pokemonDetails.sprites.front_female}}" (click)="previewImage(pokemonDetails.sprites.front_female)">
+      <img *ngIf="pokemonDetails.sprites.back_female" src="{{pokemonDetails.sprites.back_female}}" (click)="previewImage(pokemonDetails.sprites.back_female)">
+      <img *ngIf="pokemonDetails.sprites.front_shiny" src="{{pokemonDetails.sprites.front_shiny}}" (click)="previewImage(pokemonDetails.sprites.front_shiny)">
+      <img *ngIf="pokemonDetails.sprites.back_shiny" src="{{pokemonDetails.sprites.back_shiny}}" (click)="previewImage(pokemonDetails.sprites.back_shiny)">
+      <img *ngIf="pokemonDetails.sprites.front_shiny_female" src="{{pokemonDetails.sprites.front_shiny_female}}" (click)="previewImage(pokemonDetails.sprites.front_shiny_female)">
+      <img *ngIf="pokemonDetails.sprites.back_shiny_female" src="{{pokemonDetails.sprites.back_shiny_female}}" (click)="previewImage(pokemonDetails.sprites.back_shiny_female)">
       <h3 *ngIf="!pokemonDetails.sprites.front_default">No Sprites to Show</h3>
     </div>
-    <div class="sprites">
-      <img class="bigImage" style="width:200px;height:200px;" src="{{pokemonDetails.sprites.front_default}}">
+    <div class="bigSprite" *ngIf="pokemonDetails.sprites">
+      <img class={{imgClass}} src="{{srcImgUrl}}">
     </div>
     <button routerLink="/list"> Back to MasterList</button>
   </div>
 
   <div class="data column">
-      <h3>Base Stats</h3>
+      <h3>{{ pokemonDetails.name | titlecase }}'s Base Stats</h3>
       <table class="center">
         <tbody>
           <tr *ngFor="let stats of pokemonDetails.stats">
