@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, flatMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Pokemon, PokemonDetails } from '../pokemon';
 
@@ -20,21 +20,38 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   previewUrl: string;
   imgClass: string;
   goToThisId: number;
+  spriteLabel: string;
+  specieUrl: string
+  description: string;
+  evoChainUrl: string;
+
 
   constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
 
   ngOnInit() {
+    this.srcImgUrl = "https://thumbs.gfycat.com/RemorsefulIllustriousDog-small.gif";
+    this.imgClass = "defaultBigImg";
     this.subs = this.routes.params.pipe(
       switchMap((params) => {
-        console.log(params.pokemonName);
-        return this._pokemonService.getPokemonDetails(params.pokemonName);
+        console.log(params);
+        return this._pokemonService.getPokemonDetails(params.pokemonName).pipe(
+          switchMap(response1 => {
+            this.pokemonDetails = response1;
+            this.specieUrl = response1.species.url;
+            return this._pokemonService.getPokemonSpecies(this.specieUrl)
+          })
+        )
       })
-    ).subscribe((response: Pokemon) => {
-      console.log(response);
-      this.pokemonDetails = response;
-      this.srcImgUrl = "https://thumbs.gfycat.com/RemorsefulIllustriousDog-small.gif";
-      this.imgClass = "defaultBigImg"
-    });
+    ).subscribe((response2) => {
+      console.log(response2);
+      for (let flavorText of response2.flavor_text_entries) {
+        if (flavorText.language.name == 'en') {
+          this.description = flavorText.flavor_text;
+          console.log(this.description);
+          break;
+        }
+      }
+    })
   }
 
   ngOnDestroy() {
@@ -56,9 +73,32 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     this.srcImgUrl = imgUrl;
     console.log(imgUrl);
     this.imgClass = "withSprites";
-  }
-
-  asd(){
-    console.log("asd");
+    console.log(imgUrl.split("/")[8]);
+    console.log(imgUrl.split("/")[9]);
+    console.log(imgUrl.split("/")[10]);
+    if (imgUrl.split("/")[8] === "back") {
+      if (imgUrl.split("/")[9] === "shiny") {
+        if (imgUrl.split("/")[10] === "female") {
+          this.spriteLabel = "Back Shiny Female";
+        } else {
+          this.spriteLabel = "Back Shiny";
+        }
+      } else if (imgUrl.split("/")[9] === "female") {
+        this.spriteLabel = "Back Female";
+      } else {
+        this.spriteLabel = "Back Default";
+      }
+    } else if (imgUrl.split("/")[8] === "shiny") {
+      if (imgUrl.split("/")[9] === "female") {
+        this.spriteLabel = "Front Shiny Female";
+      } else {
+        this.spriteLabel = "Front Shiny";
+      }
+    } else if (imgUrl.split("/")[8] === "female") {
+      this.spriteLabel = "Front Female";
+    } else {
+      this.spriteLabel = "Front Default";
+    }
+    console.log(this.spriteLabel);
   }
 }

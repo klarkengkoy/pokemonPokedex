@@ -23,6 +23,10 @@ button:hover {
     padding: 5px 10px;
 }
 
+button.masterlistButton{
+    margin-top: 20px;
+}
+
 .invisible{
     padding: 0px;
 }
@@ -54,7 +58,10 @@ td, tr, th {
     border-bottom: 1px solid gray;
     padding: 5px 20px;
     line-height: 1.5;
-    
+}
+
+table {
+    margin-bottom: 20px;
 }
 
 .center{

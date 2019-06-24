@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="data column">
-    <h3>{{ pokemonDetails.name | titlecase }}'s Data</h3>
+    <h2>{{ pokemonDetails.name | titlecase }}'s Data</h2>
     <table class="center">
       <tbody>
         <tr>
@@ -47,6 +47,17 @@
         </tr>
       </tbody>
     </table>
+    <p style="margin-top:40px">{{ description }}</p>
+
+    <h2 style="margin-top:30px">{{ pokemonDetails.name | titlecase }}'s Base Stats</h2>
+    <table class="center">
+      <tbody>
+        <tr *ngFor="let stats of pokemonDetails.stats">
+          <td class="label">{{ stats.stat.name | titlecase }}</td>
+          <td class="details">{{ stats.base_stat }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="column">
@@ -65,18 +76,12 @@
     <div class="bigSprite" *ngIf="pokemonDetails.sprites">
       <img class={{imgClass}} src="{{srcImgUrl}}">
     </div>
-    <button routerLink="/list"> Back to MasterList</button>
+    <h3>{{ spriteLabel }}</h3>
+    <button class="masterlistButton" routerLink="/list"> Back to MasterList</button>
   </div>
 
   <div class="data column">
-      <h3>{{ pokemonDetails.name | titlecase }}'s Base Stats</h3>
-      <table class="center">
-        <tbody>
-          <tr *ngFor="let stats of pokemonDetails.stats">
-            <td class="label">{{ stats.stat.name | titlecase }}</td>
-            <td class="details">{{ stats.base_stat }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <app-evolution-chain></app-evolution-chain>
   </div>
+  
 </div>

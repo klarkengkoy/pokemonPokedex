@@ -4,3 +4,4 @@
   <p><span class=pokemonid>#{{ getId(pokemon.url) | number: '3.0-0' }} </span><br><span
       class="pokemonname">{{ pokemon.name | titlecase }}</span></p>
 </div>
+<pagination-controls (pageChange)="p=$event"></pagination-controls>
