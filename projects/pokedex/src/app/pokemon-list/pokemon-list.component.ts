@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -11,12 +12,20 @@ export class PokemonListComponent implements OnInit {
 
   public pokemons = {};
   subs1: Subscription;
+  typeList: [];
+  shouldNotRemove: boolean;
 
 
   constructor(private _pokemonService: PokemonService) { }
 
   ngOnInit() {
-    this.subs1 = this._pokemonService.getPokemons().subscribe(data => {
+    this.subs1 = this._pokemonService.getType().pipe(
+      switchMap(response => {
+        console.log(response);
+        this.typeList = response;
+        return this._pokemonService.getPokemons()
+      })
+    ).subscribe(data => {
       this.pokemons = data;
     });
   }
@@ -33,10 +42,6 @@ export class PokemonListComponent implements OnInit {
     const id = url.split("/");
     const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
     return imgUrl;
-  }
-
-  console(this) {
-    console.log(this);
   }
 
 }

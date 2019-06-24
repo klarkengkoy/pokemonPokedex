@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { EvolutionChainComponent } from './pokemon-details/evolution-chain/evolution-chain.component';
+import { MasterlistTypesComponent } from './masterlist-types/masterlist-types.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EvolutionChainComponent } from './pokemon-details/evolution-chain/evolu
     PageNotFoundComponent,
     HomeComponent,
     EvolutionChainComponent,
+    MasterlistTypesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, flatMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { Pokemon, PokemonDetails } from '../pokemon';
+import { Pokemon } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-details',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
-import { Pokemon } from './pokemon';
+import { Pokemon, PokemonDetails } from './pokemon';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class PokemonService {
 
   private _url: string = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=999";
+  private _url1: string = "https://pokeapi.co/api/v2/type";
   private _url2: string = "https://pokeapi.co/api/v2/pokemon";
 
 
@@ -28,5 +29,13 @@ export class PokemonService {
   
   getEvolutionChain(evoChainUrl: string): Observable<Pokemon> {
     return this.http.get<any>(evoChainUrl);
+  }
+  
+  getPokemonType(typeName: string):Observable<PokemonDetails>{
+    return this.http.get<any>(`${this._url1}/${typeName}`);
+  }
+
+  getType(): Observable<any> {
+    return this.http.get<any>(this._url1);
   }
 }
