@@ -15,8 +15,8 @@ export class PokemonService {
 
   constructor(public http: HttpClient) { }
 
-  getPokemons(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this._url);
+  getPokemons(): Observable<Pokemon> {
+    return this.http.get<Pokemon>(this._url);
   }
 
   getPokemonDetails(name: string): Observable<Pokemon> {

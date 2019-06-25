@@ -15,6 +15,7 @@ export class MasterlistTypesComponent implements OnInit {
   subs1: Subscription;
   types = {};
   pokemonType: string;
+  p: number; 
 
   constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
 
@@ -27,7 +28,7 @@ export class MasterlistTypesComponent implements OnInit {
       })
     ).subscribe((response) => {
       console.log(response);
-      this.types = response;
+      this.types = response.pokemon;
     })
   }
 

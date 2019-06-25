@@ -3,7 +3,7 @@ import { PokemonService } from '../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { Pokemon } from '../pokemon';
+import { PokemonDetails } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-details',
@@ -12,7 +12,7 @@ import { Pokemon } from '../pokemon';
 })
 export class PokemonDetailsComponent implements OnInit, OnDestroy {
 
-  public pokemonDetails = new Pokemon();
+  public pokemonDetails;
   isHiddenStr: string;
   private is_hidden: boolean;
   subs: Subscription;

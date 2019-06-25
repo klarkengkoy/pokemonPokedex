@@ -1,13 +1,13 @@
 <tbody>
   <tr>
-    <td *ngFor="let type of typeList.results">
+    <td *ngFor="let type of typeList">
       <p  [routerLink]="['/type', type.name ]" class="{{type.name}} typeIcon">
         {{ type.name | titlecase}}
       </p></td>
   </tr>
 </tbody>
 <pagination-controls (pageChange)="p=$event"></pagination-controls>
-<div [routerLink]="['/details', pokemon.name]" class=pokemonBox *ngFor="let pokemon of pokemons.results | paginate: { itemsPerPage: 138, currentPage: p}">
+<div [routerLink]="['/details', pokemon.name]" class=pokemonBox *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: 138, currentPage: p}">
   <img width=150 height=150 alt="pokemon thumbnail" [src]="getImg(pokemon.url)" onError="this.src='http://www.quickmeme.com/img/84/84a445fe41472facb50ad45072c03ad334ccedba9ed536b3284f538dcc7e32e0.jpg'">
   <p><span class=pokemonid>#{{ getId(pokemon.url) | number: '3.0-0' }} </span><br><span
       class="pokemonname">{{ pokemon.name | titlecase }}</span></p>

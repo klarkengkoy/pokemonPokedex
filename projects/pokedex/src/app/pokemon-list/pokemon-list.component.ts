@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { Pokemon } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -12,8 +13,9 @@ export class PokemonListComponent implements OnInit {
 
   public pokemons = {};
   subs1: Subscription;
-  typeList: [];
+  typeList: any;
   shouldNotRemove: boolean;
+  p: number;
 
 
   constructor(private _pokemonService: PokemonService) { }
@@ -22,11 +24,11 @@ export class PokemonListComponent implements OnInit {
     this.subs1 = this._pokemonService.getType().pipe(
       switchMap(response => {
         console.log(response);
-        this.typeList = response;
+        this.typeList = response.results;
         return this._pokemonService.getPokemons()
       })
-    ).subscribe(data => {
-      this.pokemons = data;
+    ).subscribe((data: Pokemon) => {
+      this.pokemons = data.results;
     });
   }
 

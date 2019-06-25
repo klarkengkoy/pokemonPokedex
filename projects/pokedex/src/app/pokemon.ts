@@ -6,6 +6,7 @@ export class Pokemon {
     flavor_text_entries: any;
     evolution_chain: any;
     chain: Chain;
+    results: {};
 }
 
 export interface Chain {
@@ -23,7 +24,7 @@ export class PokemonDetails {
     name: string;
     height: number;
     weight: number;
-    abilities : [string];
+    abilities: [string];
     imageUrl: string;
     speed: number;
     specialDefense: number;
@@ -33,4 +34,6 @@ export class PokemonDetails {
     hp: number;
     type: [string];
     species: Pokemon;
+    pokemon: {};
 }
+
