@@ -58,17 +58,6 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  checkIfHidden(isHiddenStr) {
-    console.log(isHiddenStr);
-    if (isHiddenStr == "true") {
-      this.is_hidden = true;
-    } else {
-      this.is_hidden = false;
-    }
-    console.log(this.is_hidden);
-    return this.is_hidden;
-  }
-
   previewImage(imgUrl: string) {
     this.srcImgUrl = imgUrl;
     console.log(imgUrl);

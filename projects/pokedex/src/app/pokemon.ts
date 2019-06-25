@@ -18,7 +18,6 @@ export interface Species {
     url: string;
 }
 
-
 export class PokemonDetails {
     id: number;
     name: string;
