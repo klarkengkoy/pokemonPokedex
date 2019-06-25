@@ -1,3 +1,11 @@
+<tbody>
+  <tr>
+    <td *ngFor="let type of typeList">
+      <p  [routerLink]="['/type', type.name ]" class="{{type.name}} typeIcon">
+        {{ type.name | titlecase}}
+      </p></td>
+  </tr>
+</tbody>
 <h2>{{ pokemonType | titlecase }} Type Pokemons</h2>
 <pagination-controls (pageChange)="p=$event"></pagination-controls>
 <div [routerLink]="['/details', types.pokemon.name]" class=pokemonBox *ngFor="let types of types | paginate: { itemsPerPage: 24, currentPage: p}">

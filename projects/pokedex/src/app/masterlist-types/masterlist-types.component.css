@@ -71,3 +71,94 @@ img{
 h2{
     font-family: "Flexo-Medium",arial,sans-serif;
 }
+
+.typeIcon{
+    display: inline-block;
+    width: 66px;
+    margin: 3px;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.2);
+    font-size: .9rem;
+    cursor: pointer;
+}
+
+.grass{
+    background: linear-gradient(180deg, #9bcc50 50%, #9bcc50 50%);
+    
+}
+.poison{
+    background: linear-gradient(180deg, #b97fc9 50%, #b97fc9 50%);
+   
+}
+.fire{
+    background: linear-gradient(180deg, #fd7d24 50%, #fd7d24 50%);
+    
+}
+.flying{
+    background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+    
+}
+.bug{
+    background: linear-gradient(180deg, #729f3f 50%, #729f3f 50%);
+    
+}
+.water{
+    background: linear-gradient(180deg, #4592c4 50%, #4592c4 50%);
+    
+}
+.normal{
+    background: linear-gradient(180deg, #a4acaf 50%, #a4acaf 50%);
+    
+}
+.electric{
+    background: linear-gradient(180deg, #eed535 50%, #eed535 50%);
+    
+}
+.fairy{
+    background: linear-gradient(180deg, #fdb9e9 50%, #fdb9e9 50%);
+    
+}
+.ground{
+    background: linear-gradient(180deg, #f7de3f 50%, #ab9842 50%);
+    
+}
+.rock{
+    background: linear-gradient(180deg, #a38c21 50%, #a38c21 50%);
+    
+}
+.fighting{
+    background: linear-gradient(180deg, #d56723 50%, #d56723 50%);
+    
+}
+.dark{
+    background: linear-gradient(180deg, #707070 50%, #707070 50%);
+    
+}
+.steel{
+    background: linear-gradient(180deg, #9eb7b8 50%, #9eb7b8 50%);
+    
+}
+.psychic{
+    background: linear-gradient(180deg, #f366b9 50%, #f366b9 50%);
+    
+}
+.ghost{
+    background: linear-gradient(180deg, #7b62a3 50%, #7b62a3 50%);
+    
+}
+.ice{
+    background: linear-gradient(180deg, #51c4e7 50%, #51c4e7 50%);
+    
+}
+.dragon{
+    background: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
+    
+}
+.shadow{
+    display: none;
+}
+.unknown{
+    display: none;
+}

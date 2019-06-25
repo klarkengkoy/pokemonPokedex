@@ -15,7 +15,8 @@ export class MasterlistTypesComponent implements OnInit {
   subs1: Subscription;
   types = {};
   pokemonType: string;
-  p: number; 
+  p: number;
+  typeList: any;
 
   constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
 
@@ -24,27 +25,33 @@ export class MasterlistTypesComponent implements OnInit {
       switchMap((params) => {
         this.pokemonType = params.typeName;
         console.log(params);
-        return this._pokemonService.getPokemonType(params.typeName)
+        return this._pokemonService.getPokemonType(params.typeName).pipe(
+          switchMap((response) => {
+            console.log(response);
+            this.types = response.pokemon;
+            return this._pokemonService.getType()
+          })
+        )
       })
     ).subscribe((response) => {
       console.log(response);
-      this.types = response.pokemon;
+      this.typeList = response.results;
     })
   }
 
-  ngOnDestroy() {
-    this.subs1.unsubscribe();
-  }
+ngOnDestroy() {
+  this.subs1.unsubscribe();
+}
 
-  getId(url: string) {
-    return url.split("/")[6];
-  }
+getId(url: string) {
+  return url.split("/")[6];
+}
 
-  getImg(url: string) {
-    const id = url.split("/");
-    const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
-    return imgUrl;
-  }
+getImg(url: string) {
+  const id = url.split("/");
+  const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
+  return imgUrl;
+}
 
 }
 
