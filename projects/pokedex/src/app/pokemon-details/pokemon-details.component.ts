@@ -3,7 +3,6 @@ import { PokemonService } from '../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { PokemonDetails } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-details',
