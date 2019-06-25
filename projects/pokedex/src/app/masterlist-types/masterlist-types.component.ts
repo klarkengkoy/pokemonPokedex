@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MasterlistTypesComponent implements OnInit {
 
   subs1: Subscription;
-  types = {};
+  types = [];
   pokemonType: string;
   p: number;
   typeList: any;

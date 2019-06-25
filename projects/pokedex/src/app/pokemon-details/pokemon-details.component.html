@@ -83,7 +83,8 @@
       <h3 *ngIf="!pokemonDetails.sprites.front_default">No Sprites to Show</h3>
     </div>
     <div style="margin-top: 30px; margin-bottom: 60px" *ngIf="pokemonDetails.sprites">
-      <img class={{imgClass}} src="{{srcImgUrl}}">
+      <img *ngIf="defaultImage" class="defaultBigImg" src="https://thumbs.gfycat.com/RemorsefulIllustriousDog-small.gif">
+      <img *ngIf="!defaultImage" class="withSprites" src="{{srcImgUrl}}">
     </div>
     <h3>{{ spriteLabel }}</h3>
     <button class="masterlistButton" routerLink="/list"> Back to MasterList</button>

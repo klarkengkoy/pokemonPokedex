@@ -6,7 +6,7 @@ export class Pokemon {
     flavor_text_entries: any;
     evolution_chain: any;
     chain: Chain;
-    results: {};
+    results: [];
 }
 
 export interface Chain {
@@ -33,6 +33,6 @@ export class PokemonDetails {
     hp: number;
     type: [string];
     species: Pokemon;
-    pokemon: {};
+    pokemon: [];
 }
 

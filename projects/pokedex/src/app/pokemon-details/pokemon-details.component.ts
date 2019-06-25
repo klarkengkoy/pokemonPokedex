@@ -17,21 +17,21 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   subs: Subscription;
   srcImgUrl: string;
   previewUrl: string;
-  imgClass: string;
   goToThisId: number;
   spriteLabel: string;
   specieUrl: string
   description: string;
   evoChainUrl: string;
+  defaultImage: boolean;
 
 
   constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
 
   ngOnInit() {
-    this.srcImgUrl = "https://thumbs.gfycat.com/RemorsefulIllustriousDog-small.gif";
-    this.imgClass = "defaultBigImg";
+    this.defaultImage = true;
     this.subs = this.routes.params.pipe(
       switchMap((params) => {
+        this.defaultImage = true;
         console.log(params);
         return this._pokemonService.getPokemonDetails(params.pokemonName).pipe(
           switchMap(response1 => {
@@ -58,9 +58,9 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
   }
 
   previewImage(imgUrl: string) {
+    this.defaultImage = false;
     this.srcImgUrl = imgUrl;
     console.log(imgUrl);
-    this.imgClass = "withSprites";
     console.log(imgUrl.split("/")[8]);
     console.log(imgUrl.split("/")[9]);
     console.log(imgUrl.split("/")[10]);

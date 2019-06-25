@@ -35,7 +35,7 @@ export class PokemonService {
     return this.http.get<any>(`${this._url1}/${typeName}`);
   }
 
-  getType(): Observable<any> {
+  getType(): Observable<Pokemon> {
     return this.http.get<any>(this._url1);
   }
 }

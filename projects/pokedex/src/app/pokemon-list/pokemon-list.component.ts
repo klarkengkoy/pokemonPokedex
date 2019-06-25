@@ -11,7 +11,7 @@ import { Pokemon } from '../pokemon';
 })
 export class PokemonListComponent implements OnInit {
 
-  public pokemons = {};
+  public pokemons = [];
   subs1: Subscription;
   typeList: any;
   shouldNotRemove: boolean;
