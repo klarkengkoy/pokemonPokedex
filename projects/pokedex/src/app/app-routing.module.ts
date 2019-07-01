@@ -4,15 +4,15 @@ import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import { MasterlistTypesComponent } from './masterlist-types/masterlist-types.component';
+import { MasterlistTypesComponent } from './pokemon-list/masterlist-types/masterlist-types.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent },
   { path: 'list', component: PokemonListComponent },
   { path: 'details/:pokemonName', component: PokemonDetailsComponent },
   { path: 'type/:typeName', component: MasterlistTypesComponent },
-  { path: "**", component: PageNotFoundComponent }
+  { path: '*', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -20,4 +20,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [HomeComponent, PokemonListComponent, PokemonDetailsComponent, PageNotFoundComponent, MasterlistTypesComponent]
+export const routingComponents = [HomeComponent, PokemonListComponent,
+  PokemonDetailsComponent, PageNotFoundComponent, MasterlistTypesComponent];

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../pokemon.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { PokemonService } from '../../pokemon.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-masterlist-types',
-  templateUrl: './masterlist-types.component.html',
-  styleUrls: ['./masterlist-types.component.css']
+  templateUrl: '../pokemon-list.component.html',
+  styleUrls: ['../pokemon-list.component.css']
 })
-export class MasterlistTypesComponent implements OnInit {
+export class MasterlistTypesComponent implements OnInit, OnDestroy {
 
   subs1: Subscription;
   types = [];
@@ -18,25 +18,25 @@ export class MasterlistTypesComponent implements OnInit {
   p: number;
   typeList: any;
 
-  constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
+  constructor(public routes: ActivatedRoute, private pokemonService: PokemonService) { }
 
   ngOnInit() {
     this.subs1 = this.routes.params.pipe(
       switchMap((params) => {
         this.pokemonType = params.typeName;
         console.log(params);
-        return this._pokemonService.getPokemonType(params.typeName).pipe(
+        return this.pokemonService.getPokemonType(params.typeName).pipe(
           switchMap((response) => {
             console.log(response);
             this.types = response.pokemon;
-            return this._pokemonService.getType()
+            return this.pokemonService.getType();
           })
-        )
+        );
       })
     ).subscribe((response) => {
       console.log(response);
       this.typeList = response.results;
-    })
+    });
   }
 
 ngOnDestroy() {
@@ -44,11 +44,11 @@ ngOnDestroy() {
 }
 
 getId(url: string) {
-  return url.split("/")[6];
+  return url.split('/')[6];
 }
 
 getImg(url: string) {
-  const id = url.split("/");
+  const id = url.split('/');
   const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
   return imgUrl;
 }

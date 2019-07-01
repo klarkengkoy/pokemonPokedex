@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { Pokemon } from '../pokemon';
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
-export class PokemonListComponent implements OnInit {
+export class PokemonListComponent implements OnInit, OnDestroy {
 
   public pokemons = [];
   subs1: Subscription;
@@ -18,14 +18,14 @@ export class PokemonListComponent implements OnInit {
   p: number;
 
 
-  constructor(private _pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit() {
-    this.subs1 = this._pokemonService.getType().pipe(
+    this.subs1 = this.pokemonService.getType().pipe(
       switchMap(response => {
         console.log(response);
         this.typeList = response.results;
-        return this._pokemonService.getPokemons()
+        return this.pokemonService.getPokemons()
       })
     ).subscribe((data: Pokemon) => {
       this.pokemons = data.results;
@@ -37,11 +37,11 @@ export class PokemonListComponent implements OnInit {
   }
 
   getId(url: string) {
-    return url.split("/")[6];
+    return url.split('/')[6];
   }
 
   getImg(url: string) {
-    const id = url.split("/");
+    const id = url.split('/');
     const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
     return imgUrl;
   }

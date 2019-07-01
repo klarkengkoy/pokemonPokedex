@@ -10,12 +10,16 @@
     font-size: 15px;
 }
 
+h2{
+    color: #132171;
+}
+
 p{
     margin-top: 0px;
 }
 
 .pokemonBox{
-  background-color: #2098d1 !important;
+  background-color: #f9c23f !important;
   cursor:pointer;
   -webkit-transition: color 300ms;
   transition: color 300ms;
@@ -56,7 +60,7 @@ img{
 
 .pokemonid {
     font-family: "Flexo-Bold",arial,sans-serif;
-    color: #919191;
+    color: #132171;
     font-size: 14px;
     font-weight: bold;
     font-style: italic;
@@ -64,7 +68,7 @@ img{
 
 .pokemonname{
     font-family: "Flexo-Demi",arial,sans-serif;
-    color: #313131;
+    color: #132171;
     font-weight: bold;
 }
 

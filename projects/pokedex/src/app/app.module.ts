@@ -11,8 +11,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MasterlistTypesComponent } from './pokemon-list/masterlist-types/masterlist-types.component';
 import { EvolutionChainComponent } from './pokemon-details/evolution-chain/evolution-chain.component';
-import { MasterlistTypesComponent } from './masterlist-types/masterlist-types.component';
+
 
 @NgModule({
   declarations: [

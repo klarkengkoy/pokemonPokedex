@@ -16,19 +16,19 @@ export class EvolutionChainComponent implements OnInit, OnDestroy {
   chain: Chain;
   species: Species;
 
-  constructor(public routes: ActivatedRoute, private _pokemonService: PokemonService) { }
+  constructor(public routes: ActivatedRoute, private pokemonService: PokemonService) { }
 
   ngOnInit() {
     this.subs = this.routes.params.pipe(
       switchMap((params) => {
         console.log(params);
-        return this._pokemonService.getPokemonDetails(params.pokemonName).pipe(
+        return this.pokemonService.getPokemonDetails(params.pokemonName).pipe(
           switchMap(response1 => {
             console.log(response1)
-            return this._pokemonService.getPokemonSpecies(response1.species.url).pipe(
+            return this.pokemonService.getPokemonSpecies(response1.species.url).pipe(
               switchMap(response2 => {
                 console.log(response2);
-                return this._pokemonService.getEvolutionChain(response2.evolution_chain.url);
+                return this.pokemonService.getEvolutionChain(response2.evolution_chain.url);
               })
             )
           })
@@ -36,20 +36,17 @@ export class EvolutionChainComponent implements OnInit, OnDestroy {
       })
     ).subscribe((response3) => {
       console.log(response3);
-      console.log(response3.chain.species.name)
+      console.log(response3.chain.species.name);
       this.chain = response3.chain;
-      
-
-
-    })
+    });
   }
 
   ngOnDestroy() {
     this.subs.unsubscribe();
   }
-  
+
   getImg(url: string) {
-    const id = url.split("/");
+    const id = url.split('/');
     const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
     return imgUrl;
   }

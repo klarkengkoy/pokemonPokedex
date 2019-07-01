@@ -1,68 +1,25 @@
-<button class="invisible" [ngSwitch]="pokemonDetails.id">
-  <button *ngSwitchCase="10001" [routerLink]="['/details', 807 ]">Previous</button>
-  <button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 1}"
-    [routerLink]="['/details', pokemonDetails.id-1 ]">Previous</button>
-</button>
-<button button class="invisible" [ngSwitch]="pokemonDetails.id">
-  <button *ngSwitchCase="807" [routerLink]="['/details', 10001 ]">Next Pokémon</button>
-  <button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 10157}"
-    [routerLink]="['/details', pokemonDetails.id+1 ]">Next Pokémon</button>
-</button>
-
-<div class="row">
-  <div class="data column">
-    <h2>{{ pokemonDetails.name | titlecase }}'s Data</h2>
-    <table class="center">
-      <tbody>
-        <tr>
-          <td class="label">Pokédex ID</td>
-          <th class="details"># {{ pokemonDetails.id | number: '3.0-0' }}</th>
-        </tr>
-        <tr>
-          <td class="label">Height</td>
-          <td class="details"> {{ pokemonDetails.height / 10 | number : '1.2-2' }} meters </td>
-        </tr>
-        <tr>
-          <td class="label">Weight</td>
-          <td class="details">{{ pokemonDetails.weight /10 | number : '1.2-2' }} kilograms</td>
-        </tr>
-        <tr>
-          <td class="label">Base Experience</td>
-          <td class="details">{{ pokemonDetails.base_experience}}</td>
-        </tr>
-        <tr>
-          <td class="label">Abilities</td>
-          <td class="details" *ngIf="pokemonDetails.abilities">
-            <p *ngFor="let abilities of pokemonDetails.abilities"> {{abilities.ability.name | titlecase }}
-              <dd *ngIf="abilities.is_hidden"> => Hidden Ability </dd>
-              <dd *ngIf="!abilities.is_hidden"> => Normal Ability </dd>
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">Type/Types</td>
-          <td class="details" *ngIf="pokemonDetails.types">
-            <p [routerLink]="['/type', types.type.name ]" *ngFor="let types of pokemonDetails.types" class="{{types.type.name}} typeIcon">
-              {{ types.type.name | titlecase }}
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2 style="margin-top:30px">{{ pokemonDetails.name | titlecase }}'s Base Stats</h2>
-    <table class="center">
-      <tbody>
-        <tr *ngFor="let stats of pokemonDetails.stats">
-          <td class="label">{{ stats.stat.name | titlecase }}</td>
-          <td class="details">{{ stats.base_stat }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="column">
-    <h2>{{ pokemonDetails.name | titlecase }}'s Sprites</h2>
+<div *ngIf='pokemonDetails' class="buttonDiv">
+  <button class="invisible" [ngSwitch]="pokemonDetails.id">
+    <button *ngSwitchCase="10001" [routerLink]="['/details', 807 ]">Previous</button>
+    <button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 1}"
+      [routerLink]="['/details', pokemonDetails.id-1 ]">Previous Pokémon</button>
+  </button>
+  <button button class="invisible" [ngSwitch]="pokemonDetails.id">
+    <button *ngSwitchCase="807" [routerLink]="['/details', 10001 ]">Next Pokémon</button>
+    <button *ngSwitchDefault [ngClass]="{'disableButton':pokemonDetails.id === 10157}"
+      [routerLink]="['/details', pokemonDetails.id+1 ]">Next Pokémon</button>
+  </button>
+</div>
+<h1 *ngIf='pokemonDetails'><span class="h"> #{{ pokemonDetails.id | number: '3.0-0' }} </span>{{ pokemonDetails.name | titlecase }} </h1>
+<div class="colorGray limitWidth2">
+  <div *ngIf='pokemonDetails' class="limitWidth">
+    <span *ngIf="pokemonDetails.sprites">
+      <div class=pokemonBox>
+        <img *ngIf="defaultImage" class="defaultBigImg" [src]="getDefaultSrc()">
+        <img *ngIf="!defaultImage" class="withSprites" src="{{srcImgUrl}}">
+      </div>
+      <p class="bold">{{ spriteLabel }}</p>
+    </span>
     <div class="sprites" *ngIf="pokemonDetails.sprites">
       <img *ngIf="pokemonDetails.sprites.front_default" src="{{pokemonDetails.sprites.front_default}}"
         (click)="previewImage(pokemonDetails.sprites.front_default)">
@@ -82,18 +39,62 @@
         (click)="previewImage(pokemonDetails.sprites.back_shiny_female)">
       <h3 *ngIf="!pokemonDetails.sprites.front_default">No Sprites to Show</h3>
     </div>
-    <div style="margin-top: 30px; margin-bottom: 60px" *ngIf="pokemonDetails.sprites">
-      <img *ngIf="defaultImage" class="defaultBigImg" src="https://thumbs.gfycat.com/RemorsefulIllustriousDog-small.gif">
-      <img *ngIf="!defaultImage" class="withSprites" src="{{srcImgUrl}}">
+    <div class="limitWidth center">
+      <p class=font> {{ description }}</p>
     </div>
-    <h3>{{ spriteLabel }}</h3>
-    <button class="masterlistButton" routerLink="/list"> Back to MasterList</button>
   </div>
-
-  <div class="data column">
-    <h2>{{ pokemonDetails.name | titlecase }}'s Description</h2>
-    <p style="margin-bottom:50px"> {{ description }}</p>
+  <div *ngIf='pokemonDetails'>
+    <div>
+      <h2>Data</h2>
+      <table class="center">
+        <tbody>
+          <tr>
+            <td class="label">Pokédex ID</td>
+            <th class="details"># {{ pokemonDetails.id | number: '3.0-0' }}</th>
+          </tr>
+          <tr>
+            <td class="label">Height</td>
+            <td class="details"> {{ pokemonDetails.height / 10 | number : '1.2-2' }} meters </td>
+          </tr>
+          <tr>
+            <td class="label">Weight</td>
+            <td class="details">{{ pokemonDetails.weight /10 | number : '1.2-2' }} kilograms</td>
+          </tr>
+          <tr>
+            <td class="label">Base Experience</td>
+            <td class="details">{{ pokemonDetails.base_experience}}</td>
+          </tr>
+          <tr>
+            <td class="label">Abilities</td>
+            <td class="details" *ngIf="pokemonDetails.abilities">
+              <p *ngFor="let abilities of pokemonDetails.abilities"> {{abilities.ability.name | titlecase }}
+                <dd *ngIf="abilities.is_hidden"> => Hidden Ability </dd>
+                <dd *ngIf="!abilities.is_hidden"> => Normal Ability </dd>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Type/Types</td>
+            <td class="details" *ngIf="pokemonDetails.types">
+              <p [routerLink]="['/type', types.type.name ]" *ngFor="let types of pokemonDetails.types"
+                class="{{types.type.name}} typeIcon">
+                {{ types.type.name | titlecase }}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 style="margin-top:30px">Base Stats</h2>
+      <table class="center">
+        <tbody>
+          <tr *ngFor="let stats of pokemonDetails.stats">
+            <td class="label">{{ stats.stat.name | titlecase }}</td>
+            <td class="details">{{ stats.base_stat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <app-evolution-chain></app-evolution-chain>
   </div>
-
 </div>
+<button class="masterlistButton" routerLink="/list"> Back to MasterList</button>

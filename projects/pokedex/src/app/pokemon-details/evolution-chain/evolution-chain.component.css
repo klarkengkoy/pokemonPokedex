@@ -1,3 +1,13 @@
 img:hover{
     cursor: pointer;
 }
+
+div.inline{
+    display: inline-block;
+    margin: auto;
+}
+
+.inline1{
+    display: block;
+}
+

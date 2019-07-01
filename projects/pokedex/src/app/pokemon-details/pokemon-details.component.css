@@ -9,9 +9,9 @@
 }
 
 button {
-    border: 1px solid #0066cc;
-    background-color: #0099cc;
-    color: #ffffff;
+    border: 2px solid #132171;
+    background-color: #f9c23f;
+    color: #132171;
     padding: 5px 10px;
     cursor: pointer;
 }
@@ -29,6 +29,7 @@ button.masterlistButton{
 
 .invisible{
     padding: 0px;
+    margin: 10px;
 }
 
 .invisible:hover{
@@ -53,6 +54,21 @@ th{
     color: gray;
 }
 
+h1{
+    font-family: "Flexo-Medium",arial,sans-serif;
+}
+
+span.h{
+    font-style: italic;
+    color: gray; 
+    font-family: "Flexo-Medium",arial,sans-serif;
+}
+
+.colorGray{
+    color: #000040;
+    font-family: "Flexo-Medium",arial,sans-serif;
+}
+
 td, tr, th {
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
@@ -69,8 +85,12 @@ table {
     margin-right:auto;
 }
 
-p{
-    margin: 0px;
+p.bold {
+    font-weight: bold;
+}
+
+div.buttonDiv {
+    margin: 0px 0px;
 }
 
 div.sprite{
@@ -100,13 +120,45 @@ div.row:after{
 }
 
 .defaultBigImg{
-    width: 356px;
+    width: 200px;
     height: 200px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+}
+
+.limitWidth{
+    width: 400px;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.limitWidth2{
+    width: 800px;
+    margin-left:auto; 
+    margin-right:auto;
+    background-color: #f0f0f0;
+    padding: 40px 0px;
 }
 
 .withSprites{
     width:200px;
     height: 200px;
+}
+
+.pokemonBox{
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 10px;
+    background:	#f0f0f0;
+}
+
+.font{
+    font-size: 112.5%;
+    margin-bottom: 40px;
 }
 
 .label{
@@ -117,10 +169,6 @@ div.row:after{
 .details {
     text-align: left;
     border-left: 1px solid gray;
-}
-
-h2{
-    font-family: "Flexo-Medium",arial,sans-serif;
 }
 
 .grass{

@@ -3,9 +3,9 @@ export class Pokemon {
     name: string;
     sprites: any;
     species: any;
-    flavor_text_entries: any;
     evolution_chain: any;
     chain: Chain;
+    flavor_text_entries: any;
     results: [];
 }
 
