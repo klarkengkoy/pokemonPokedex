@@ -10,8 +10,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'list', component: PokemonListComponent },
+  { path: 'list/:page', component: PokemonListComponent },
   { path: 'details/:pokemonName', component: PokemonDetailsComponent },
   { path: 'type/:typeName', component: MasterlistTypesComponent },
+  { path: 'type/:typeName/:page', component: MasterlistTypesComponent },
   { path: '*', component: PageNotFoundComponent }
 ];
 

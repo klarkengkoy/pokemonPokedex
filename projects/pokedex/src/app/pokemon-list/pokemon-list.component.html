@@ -1,16 +1,17 @@
 <div>
   <span *ngFor="let type of typeList">
-    <p [routerLink]="['/type', type.name ]" class="{{type.name}} typeIcon">
+    <p [routerLink]="['/type', type.name, 1 ]" class="{{type.name}} typeIcon">
       {{ type.name | titlecase}}
     </p>
   </span>
 </div>
 <h2 *ngIf="pokemonType">{{ pokemonType | titlecase }} Type Pokémons</h2>
 <h2 *ngIf="!pokemonType">List of all Pokémons</h2>
-<pagination-controls (pageChange)="p=$event"></pagination-controls>
+<pagination-controls *ngIf="!types" (pageChange)="masterListPageChange($event)"></pagination-controls>
+<pagination-controls *ngIf="types" (pageChange)="listByTypePageChange($event)"></pagination-controls>
 <div *ngIf="!types">
   <div [routerLink]="['/details', pokemon.name]" class=pokemonBox
-    *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: 138, currentPage: p}">
+    *ngFor="let pokemon of pokemons | paginate: masterListPagination">
     <img width=150 height=150 alt="pokemon thumbnail" [src]="getImg(pokemon.url)"
       onError="this.src='https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG'">
     <p><span class=pokemonid>#{{ getId(pokemon.url) | number: '3.0-0' }} </span><br><span
@@ -19,11 +20,12 @@
 </div>
 <div *ngIf="types">
   <div [routerLink]="['/details', types.pokemon.name]" class=pokemonBox
-    *ngFor="let types of types | paginate: { itemsPerPage: 24, currentPage: p}">
+    *ngFor="let types of types | paginate: byTypesPagination">
     <img width=150 height=150 alt="pokemon thumbnail" [src]="getImg(types.pokemon.url)"
       onError="this.src='https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG'">
     <p><span class=pokemonid>#{{ getId(types.pokemon.url) | number: '3.0-0' }} </span><br><span
         class="pokemonname">{{ types.pokemon.name | titlecase }}</span></p>
   </div>
 </div>
-<pagination-controls (pageChange)="p=$event"></pagination-controls>
+<pagination-controls *ngIf="!types" (pageChange)="masterListPageChange($event)"></pagination-controls>
+<pagination-controls *ngIf="types" (pageChange)="listByTypePageChange($event)"></pagination-controls>

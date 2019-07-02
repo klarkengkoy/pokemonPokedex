@@ -31,7 +31,6 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     this.subs = this.routes.params.pipe(
       switchMap((params) => {
         this.defaultImage = true;
-        console.log(params);
         return this.pokemonService.getPokemonDetails(params.pokemonName).pipe(
           switchMap(response1 => {
             this.pokemonDetails = response1;
@@ -41,11 +40,9 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
         )
       })
     ).subscribe((response2) => {
-      console.log(response2);
       for (const flavorText of response2.flavor_text_entries) {
         if (flavorText.language.name === 'en') {
           this.description = flavorText.flavor_text;
-          console.log(this.description);
           break;
         }
       }
@@ -82,7 +79,6 @@ export class PokemonDetailsComponent implements OnInit, OnDestroy {
     } else {
       this.spriteLabel = 'Front Default';
     }
-    console.log(this.spriteLabel);
   }
 
   getDefaultSrc() {

@@ -2,12 +2,25 @@ img:hover{
     cursor: pointer;
 }
 
-div.inline{
+.inline{
     display: inline-block;
-    margin: auto;
+    vertical-align: top;
 }
 
 .inline1{
     display: block;
 }
+
+img.arrow {
+    height:50px;
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+
+.pokemonBox{
+    float: top;
+    border-width: 0px;
+}
+
 

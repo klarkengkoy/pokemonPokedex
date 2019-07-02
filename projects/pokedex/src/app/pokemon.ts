@@ -7,11 +7,12 @@ export class Pokemon {
     chain: Chain;
     flavor_text_entries: any;
     results: [];
+    page: number;
 }
 
 export interface Chain {
     species: Species;
-    evolves_to: string;
+    evolves_to: [];
 }
 export interface Species {
     name: string;

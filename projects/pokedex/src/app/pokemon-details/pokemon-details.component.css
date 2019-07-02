@@ -9,18 +9,19 @@
 }
 
 button {
-    border: 2px solid #132171;
-    background-color: #f9c23f;
-    color: #132171;
-    padding: 5px 10px;
-    cursor: pointer;
+    color: #494949 !important;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding: 20px;
+    border: 4px solid #494949 !important;
+    border-radius: 6px;
 }
 
 button:hover {
-    border: 1px solid #0099cc;
-    background-color: #00aacc;
-    color: #ffffff;
-    padding: 5px 10px;
+    color: #132171 !important;
+    background: #f9c23f;
+    border-color: #132171 !important;
+    transition: all 0.4s ease 0s;
 }
 
 button.masterlistButton{
@@ -60,7 +61,7 @@ h1{
 
 span.h{
     font-style: italic;
-    color: gray; 
+    color: #132171; 
     font-family: "Flexo-Medium",arial,sans-serif;
 }
 
@@ -97,18 +98,8 @@ div.sprite{
     width: 300px;
 }
 
-div.column{
-  float: left;
-  width: 33%;
-  padding: 10px;
-}
-
 div.block{
     display: block;
-}
-
-div.data{
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 div.row:after{
@@ -130,6 +121,7 @@ div.row:after{
     width: 400px;
     margin-left:auto; 
     margin-right:auto;
+   
 }
 
 .limitWidth2{
@@ -138,6 +130,7 @@ div.row:after{
     margin-right:auto;
     background-color: #f0f0f0;
     padding: 40px 0px;
+   
 }
 
 .withSprites{

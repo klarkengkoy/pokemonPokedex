@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonService } from '../../pokemon.service';
 import { Subscription } from 'rxjs';
 
@@ -17,24 +17,27 @@ export class MasterlistTypesComponent implements OnInit, OnDestroy {
   pokemonType: string;
   p: number;
   typeList: any;
+  byTypesPagination: any;
 
-  constructor(public routes: ActivatedRoute, private pokemonService: PokemonService) { }
+  constructor(public routes: ActivatedRoute, private router: Router, private pokemonService: PokemonService) {
+    this.byTypesPagination = {
+      currentPage: 1,
+      itemsPerPage: 24
+    };
+  }
 
   ngOnInit() {
     this.subs1 = this.routes.params.pipe(
       switchMap((params) => {
         this.pokemonType = params.typeName;
-        console.log(params);
         return this.pokemonService.getPokemonType(params.typeName).pipe(
           switchMap((response) => {
-            console.log(response);
             this.types = response.pokemon;
             return this.pokemonService.getType();
           })
         );
       })
     ).subscribe((response) => {
-      console.log(response);
       this.typeList = response.results;
     });
   }
@@ -51,6 +54,10 @@ getImg(url: string) {
   const id = url.split('/');
   const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`;
   return imgUrl;
+}
+
+listByTypePageChange(newPage: number) {
+  this.router.navigate(['type/', this.pokemonType, (this.byTypesPagination.currentPage = newPage)]);
 }
 
 }

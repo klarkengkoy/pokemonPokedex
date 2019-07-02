@@ -2,32 +2,38 @@
 
   <h2>Evolution Chain</h2>
 
-  <div class="inline" *ngIf="chain.species">
+  <div *ngIf="chain.species">
     <img [routerLink]="['/details', chain.species.name]" title="{{chain.species.name | titlecase}}'s Details' Page"
       *ngIf="chain.species.url" [src]="getImg(chain.species.url)"><br>
-    <h3>Basic Pokemon <br> {{ chain.species.name | titlecase}}</h3>
+    <h3>{{ chain.species.name | titlecase}} </h3>
   </div>
 
-  <div class="inline1" *ngIf="chain.evolves_to">
-    <div *ngFor="let firstEvolve of chain.evolves_to">
-      <div>
-        <img [routerLink]="['/details', firstEvolve.species.name]"
+  <div *ngIf="chain.evolves_to.length">
+    <img class="arrow" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png">
+    <div class="inline" *ngFor="let firstEvolve of chain.evolves_to">
+      <div class="pokemonBox">
+        <img class="inline" [routerLink]="['/details', firstEvolve.species.name]"
           title="{{firstEvolve.species.name| titlecase}}'s Details' Page" *ngIf="firstEvolve.species.url"
           [src]="getImg(firstEvolve.species.url)"><br>
-        <h3>Secondary Evolution <br> {{ firstEvolve.species.name | titlecase}}</h3>
+        <h3>{{ firstEvolve.species.name | titlecase}}  </h3>
       </div>
+      <br>
       <div class="inline" *ngFor="let secondEvolve of firstEvolve.evolves_to">
-        <div>
+        <img class="arrow" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png">
+        <div class="pokemonBox">
           <img [routerLink]="['/details', secondEvolve.species.name]"
             title="{{secondEvolve.species.name| titlecase}}'s Details' Page" *ngIf="secondEvolve.species.url"
             [src]="getImg(secondEvolve.species.url)"><br>
-          <h3>Tertiary Evolution <br> {{ secondEvolve.species.name | titlecase}}</h3>
+          <h3>{{ secondEvolve.species.name | titlecase}} </h3>
         </div>
-        <div class="inline" *ngFor="let thirdEvolve of secondEvolve.evolves_to">
-          <img [routerLink]="['/details', thirdEvolve.species.name]"
-            title="{{thirdEvolve.species.name| titlecase}}'s Details' Page" *ngIf="thirdEvolve.species.url"
-            [src]="getImg(thirdEvolve.species.url)"><br>
-          <h3>Quaternary Evolution <br> {{ thirdEvolve.species.name | titlecase}}</h3>
+        <div *ngFor="let thirdEvolve of secondEvolve.evolves_to">
+          <img class="arrow" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-down-b-512.png">
+          <div class="pokemonBox">
+            <img [routerLink]="['/details', thirdEvolve.species.name]"
+              title="{{thirdEvolve.species.name| titlecase}}'s Details' Page" *ngIf="thirdEvolve.species.url"
+              [src]="getImg(thirdEvolve.species.url)"><br>
+            <h3>{{ thirdEvolve.species.name | titlecase}} </h3>
+          </div>
         </div>
       </div>
     </div>

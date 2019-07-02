@@ -76,7 +76,7 @@
           <tr>
             <td class="label">Type/Types</td>
             <td class="details" *ngIf="pokemonDetails.types">
-              <p [routerLink]="['/type', types.type.name ]" *ngFor="let types of pokemonDetails.types"
+              <p [routerLink]="['/type', types.type.name, 1 ]" *ngFor="let types of pokemonDetails.types"
                 class="{{types.type.name}} typeIcon">
                 {{ types.type.name | titlecase }}
               </p>
@@ -97,4 +97,4 @@
     <app-evolution-chain></app-evolution-chain>
   </div>
 </div>
-<button class="masterlistButton" routerLink="/list"> Back to MasterList</button>
+<button class="masterlistButton" routerLink="/list, 1"> Back to MasterList</button>

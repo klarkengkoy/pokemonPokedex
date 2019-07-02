@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap} from 'rxjs/operators';
 import { Pokemon } from '../pokemon';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-pokemon-list',
@@ -16,16 +18,27 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   typeList: any;
   shouldNotRemove: boolean;
   p: number;
+  masterListPagination: any;
+  collection = [];
 
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private pokemonService: PokemonService) {
+    this.masterListPagination = {
+      currentPage: 1,
+      itemsPerPage: 138
+    };
+  }
+  
 
   ngOnInit() {
     this.subs1 = this.pokemonService.getType().pipe(
       switchMap(response => {
-        console.log(response);
         this.typeList = response.results;
-        return this.pokemonService.getPokemons()
+        return this.pokemonService.getPokemons().pipe(
+          switchMap(params => {
+            this.masterListPagination.currentPage = params.page;
+            return this.pokemonService.getPokemons();
+          }))
       })
     ).subscribe((data: Pokemon) => {
       this.pokemons = data.results;
@@ -46,4 +59,7 @@ export class PokemonListComponent implements OnInit, OnDestroy {
     return imgUrl;
   }
 
+  masterListPageChange(newPage: number) {
+    this.router.navigate(['/list', (this.masterListPagination.currentPage = newPage)]);
+  }
 }

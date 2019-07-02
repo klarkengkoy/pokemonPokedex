@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     text-align: center;
+    background: url(https://i.pinimg.com/originals/6d/8a/c1/6d8ac1a8888d08305e9a707359099cd0.jpg)  top right no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
