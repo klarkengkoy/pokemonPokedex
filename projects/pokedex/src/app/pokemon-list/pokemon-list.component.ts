@@ -20,6 +20,8 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   p: number;
   masterListPagination: any;
   collection = [];
+  pokemonType: string;
+  types = false;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private pokemonService: PokemonService) {
