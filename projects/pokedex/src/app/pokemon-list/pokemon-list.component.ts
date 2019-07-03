@@ -30,17 +30,16 @@ export class PokemonListComponent implements OnInit, OnDestroy {
       itemsPerPage: 138
     };
   }
-  
 
   ngOnInit() {
-    this.subs1 = this.pokemonService.getType().pipe(
-      switchMap(response => {
-        this.typeList = response.results;
-        return this.pokemonService.getPokemons().pipe(
-          switchMap(params => {
-            this.masterListPagination.currentPage = params.page;
+    this.subs1 = this.route.params.pipe(
+      switchMap(params => {
+        this.masterListPagination.currentPage = params.page;
+        return this.pokemonService.getType().pipe(
+          switchMap(response => {
+            this.typeList = response.results;
             return this.pokemonService.getPokemons();
-          }))
+          }));
       })
     ).subscribe((data: Pokemon) => {
       this.pokemons = data.results;
