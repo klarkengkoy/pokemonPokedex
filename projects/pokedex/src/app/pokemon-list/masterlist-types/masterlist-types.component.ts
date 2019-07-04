@@ -30,6 +30,7 @@ export class MasterlistTypesComponent implements OnInit, OnDestroy {
     this.subs1 = this.routes.params.pipe(
       switchMap((params) => {
         this.pokemonType = params.typeName;
+        this.byTypesPagination.currentPage = params.page;
         return this.pokemonService.getPokemonType(params.typeName).pipe(
           switchMap((response) => {
             this.types = response.pokemon;
